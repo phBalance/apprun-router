@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Choose your router for apprun. One supports pretty links and html5 history and the other hash links.",
   "main": "dist",
-  "types": "dist/declarations/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "npm run clean && webpack -p --mode production",
     "build:dev": "npm run clean && webpack -p --mode development",
@@ -20,6 +20,8 @@
   "keywords": [
     "apprun",
     "router",
+    "html5 history",
+    "pretty links",
     "TypeScript",
     "JavaScript"
   ],

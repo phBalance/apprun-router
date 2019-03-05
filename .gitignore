@@ -1,0 +1,10 @@
+# 3rd party
+node_modules
+
+# Build artifacts
+dist
+hash.js
+hash.js.map
+pretty.js
+pretty.js.map
+index.d.ts

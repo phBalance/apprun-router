@@ -1,0 +1,39 @@
+{
+  "name": "apprun-router",
+  "version": "0.1.0",
+  "description": "Choose your router for apprun. One supports pretty links and html5 history and the other hash links.",
+  "main": "dist",
+  "types": "dist/declarations/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && webpack -p --mode production",
+    "build:dev": "npm run clean && webpack -p --mode development",
+    "clean": "rimraf dist/ hash.js hash.js.map pretty.js pretty.js.map index.d.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phBalance/apprun-router.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phBalance/apprun-router/issues"
+  },
+  "keywords": [
+    "apprun",
+    "router",
+    "TypeScript",
+    "JavaScript"
+  ],
+  "author": "Peter Hunnisett <peter@softwarebalm.com> (https://softwarebalm.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/phBalance/apprun-router#readme",
+  "dependencies": {
+    "apprun": "^1.16.2"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.3",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  }
+}

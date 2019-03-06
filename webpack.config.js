@@ -1,4 +1,5 @@
 const path = require("path");
+const PeerDepsExternalsPlugin = require('peer-deps-externals-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -7,7 +8,7 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    library: "apprun",
+    library: "apprun-router",
     libraryTarget: "umd",
     path: path.resolve(__dirname),
     globalObject: "this"
@@ -20,6 +21,9 @@ module.exports = {
       { test: /\.tsx?$/, loader: "ts-loader" }
     ]
   },
+  plugins: [
+     new PeerDepsExternalsPlugin()
+  ],
   devServer: {
     open: true
   },

@@ -42,7 +42,7 @@ addPrettyLinkHandlers("nav li a");
 
 #### Hash Links
 
-If you only want hash based links, there is nothing to do as the AppRun package comes with this functionality by default. However, if you'd like to use the one included in this package, simply, as in the pretty link router case, import apprun and then the hash router. There are no special onclick event handler required to support hash links.
+If you only want hash based links, there is nothing to do as the AppRun package comes with this functionality by default. However, if you'd like to use the one included in this package, simply, as in the pretty link router case, import apprun and then the hash router. There is no special onclick event handler required to support hash links.
 ```
 import "apprun";
 import "apprun-router/hash";

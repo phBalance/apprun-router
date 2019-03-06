@@ -5,7 +5,7 @@ A collection of simple router functionality (hash links, pretty links, and html5
 
 ### Compatibility
 
-* apprun 1.17.0+ (TBD)
+* apprun 1.17.0+ and 2.17.0+
 
 ### Installation
 ```

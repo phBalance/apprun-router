@@ -3,8 +3,8 @@ const PeerDepsExternalsPlugin = require('peer-deps-externals-webpack-plugin');
 
 module.exports = {
   entry: {
-    "pretty": "./src/pretty_link_router.ts",
-    "hash": "./src/hash_link_router.ts"
+    "pretty": "./src/pretty.ts",
+    "hash": "./src/hash.ts"
   },
   output: {
     filename: "[name].js",

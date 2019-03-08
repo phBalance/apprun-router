@@ -7,7 +7,7 @@
 		"experimentalDecorators": true,
 		"sourceMap": true,
 		"declaration": true,
-		"declarationDir": "dist/types"
+		"declarationDir": "."
 	},
 	"include": [
 		"src/**/*"

@@ -2,9 +2,9 @@
 node_modules
 
 # Build artifacts
-dist
 hash.js
 hash.js.map
+hash.d.ts
 pretty.js
 pretty.js.map
-index.d.ts
+pretty.d.ts

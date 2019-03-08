@@ -2,12 +2,10 @@
   "name": "apprun-router",
   "version": "0.1.0",
   "description": "Choose your router for apprun. One supports pretty links and html5 history and the other hash links.",
-  "main": "dist",
-  "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "npm run clean && webpack -p --mode production",
     "build:dev": "npm run clean && webpack -p --mode development",
-    "clean": "rimraf dist/ hash.js hash.js.map pretty.js pretty.js.map index.d.ts",
+    "clean": "rimraf dist/ hash.js hash.js.map hash.d.ts pretty.js pretty.js.map pretty.d.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

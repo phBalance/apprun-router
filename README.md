@@ -1,15 +1,17 @@
 # Routers for AppRun
-A collection of simple router functionality (hash links, pretty links, and html5 history) that replace the basic router that is available in the lightweight library [AppRun](https://github.com/yysun/apprun). It is implemented in [TypeScript](https://www.typescriptlang.org/).
+A collection of simple router functionality (hash links, pretty links, and HTML5 history) that replace the basic router that is available in the lightweight library [AppRun](https://github.com/yysun/apprun). It is implemented in [TypeScript](https://www.typescriptlang.org/).
 
 ## Getting Started
 
 ### Compatibility
 
-* apprun 1.17.0+ and 2.17.0+
+* apprun (version >= 1.17.0 or >= 2.17.0) is a peer dependency and has to be installed separately.
 
 ### Installation
 ```
 npm install --save apprun-router
+
+npm install --save apprun # peer dependency
 ```
 
 ### Common Use Cases

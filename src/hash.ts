@@ -1,4 +1,4 @@
-import app, { ROUTER_EVENT, ROUTER_404_EVENT } from "apprun";
+import { app, ROUTER_EVENT, ROUTER_404_EVENT } from "apprun";
 
 // A router that handles hash based links. It provides no more functionality than the
 // default AppRun router.
@@ -9,7 +9,7 @@ function hashLinkRouter(url: string): void {
 }
 
 const hashLinkRouterPopstateHandler = (_event: Event) => {
-	app["route"](location.hash);
+	(app as any).route(location.hash);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,4 +18,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Overwrite AppRun's default router.
-app["route"] = hashLinkRouter;
+(app as any).route = hashLinkRouter;

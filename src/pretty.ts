@@ -1,4 +1,4 @@
-import { app, ROUTER_EVENT, ROUTER_404_EVENT } from "apprun";
+import { app, ROUTER_404_EVENT, ROUTER_EVENT } from "apprun";
 
 // A router function that handles "pretty links" (i.e. non hash based urls)
 // and html5 history.
@@ -8,7 +8,7 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 	app.run("/" + name, ...rest) || app.run(ROUTER_404_EVENT, "/" + name, ...rest);
 	app.run(ROUTER_EVENT, "/" + name, ...rest);
 
-	if(!popstate) history.pushState({}, '', url);
+	if(!popstate) history.pushState({}, "", url);
 }
 
 const prettyLinkRouterPopstateHandler = (_event: PopStateEvent) => {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	prettyLinkRouter(location.pathname);
 });
 
-// linkClick method to be used as an onclick event handler. 
+// linkClick method to be used as an onclick event handler.
 const linkClick = (event: MouseEvent) => {
 	event.preventDefault();
 
@@ -29,7 +29,7 @@ const linkClick = (event: MouseEvent) => {
 	const href: string = currentTarget.href;
 
 	if(!href) console.error("linkClick invoked on target with no href!", event.currentTarget);
-	else app.run("route", href.replace(location.origin,""));
+	else app.run("route", href.replace(location.origin, ""));
 };
 prettyLinkRouter.linkClick = linkClick;
 

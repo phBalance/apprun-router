@@ -1,0 +1,18 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+		"curly": [true, "ignore-same-line"],
+		"eofline": true,
+		"indent": [true, "tabs"],
+		"no-console": false,
+		"no-unused-expression": [true, "allow-fast-null-checks"],
+		"ordered-imports": [true, "case-insensitive"],
+		"variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+		"whitespace": [true, "check-decl", "check-operator", "check-module", "check-separator", "check-rest-spread", "check-type", "check-type-operator"]
+    },
+    "rulesDirectory": []
+}

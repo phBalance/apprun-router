@@ -1,6 +1,6 @@
 {
   "name": "apprun-router",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Choose your router for apprun. One supports pretty links and html5 history and the other hash links.",
   "scripts": {
     "build": "npm run clean && webpack -p --mode production",
@@ -9,7 +9,7 @@
     "lint": "tslint -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "npm run build",
-    "prepublishOnly" : "npm run lint"
+    "prepublishOnly": "npm run lint"
   },
   "repository": {
     "type": "git",

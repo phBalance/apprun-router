@@ -9,7 +9,8 @@ function hashLinkRouter(url: string): void {
 }
 
 const hashLinkRouterPopstateHandler = (_event: Event) => {
-	(app as any).route(location.hash);
+	// app.route cannot be undefined/null as it is assigned at the end of this module.
+	app.route!(location.hash);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,4 +19,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Overwrite AppRun's default router.
-(app as any).route = hashLinkRouter;
+app.route = hashLinkRouter;

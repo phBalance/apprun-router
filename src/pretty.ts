@@ -1,4 +1,8 @@
-import { app, ROUTER_404_EVENT, ROUTER_EVENT } from "apprun";
+import { app, Route, ROUTER_404_EVENT, ROUTER_EVENT } from "apprun";
+
+export interface IPrettyRoute extends Route {
+	linkClick: (event: MouseEvent) => void;
+}
 
 // A router function that handles "pretty links" (i.e. non hash based urls)
 // and html5 history.
@@ -12,7 +16,8 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 }
 
 const prettyLinkRouterPopstateHandler = (_event: PopStateEvent) => {
-	(app as any).route(location.pathname, true);
+	// app.route cannot be undefined/null as it is assigned at the end of this module.
+	app.route!(location.pathname, true);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,4 +48,4 @@ export function addPrettyLinkHandlers(selectors: string): void {
 }
 
 // Overwrite AppRun's default router which only supports hash links.
-(app as any).route = prettyLinkRouter;
+(app.route as IPrettyRoute) = prettyLinkRouter;

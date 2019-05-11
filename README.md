@@ -5,7 +5,7 @@ A collection of simple router functionality (hash links, pretty links, and HTML5
 
 ### Compatibility
 
-* apprun (version >= 1.17.0 or >= 2.17.0) is a peer dependency and has to be installed separately.
+* apprun (version >= 1.18.0 or >= 2.18.0) is a peer dependency and has to be installed separately.
 
 ### Installation
 ```
@@ -23,13 +23,17 @@ import "apprun";
 import "apprun-router/pretty";
 ```
 
-Providing this import after AppRun will overwrite AppRun's default router with this package's pretty link router. The only thing that now remains is to ensure that when the pretty links are clicked on they don't cause a server GET request but rather get routed to the pretty router. This is done by adding an click handler to the tag that has the link behaviour.
+Providing this import after AppRun will overwrite AppRun's default router with this package's pretty link router. The only thing that now remains is to ensure that when the pretty links are clicked, they don't cause a server GET request but rather get routed to the pretty router. This is done by adding an click handler to the tag that has the link behaviour.
 
 The pretty router provides 2 ways to implement this functionality:
 
 1. Since AppRun creates the global variable app, we can add an onclick event attribute to the HTML for each link that you want to call the pretty router:
 ```
-<a href="/foo" onclick="e => (app as any).route.linkClick(e)">
+import { IPrettyRoute } from "apprun-router/pretty";
+
+...
+
+<a href="/foo" onclick="e => (app.route as IPrettyRoute).linkClick(e)">
 ```
 
 2. Once all the links are created in your DOM you can provide a description of the elements (c.f. [Locating DOM elements using selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors)).

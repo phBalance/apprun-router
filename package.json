@@ -1,6 +1,6 @@
 {
   "name": "apprun-router",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Choose your router for apprun. One supports pretty links and html5 history and the other hash links.",
   "scripts": {
     "build": "npm run clean && webpack -p --mode production",
@@ -35,11 +35,11 @@
   "devDependencies": {
     "apprun": "^1.18.0",
     "peer-deps-externals-webpack-plugin": "^1.0.4",
-    "rimraf": "^2.6.3",
-    "ts-loader": "^5.3.3",
-    "tslint": "^5.13.1",
+    "rimraf": "^3.0.0",
+    "ts-loader": "^5.4.5",
+    "tslint": "^5.19.0",
     "typescript": "^3.4.5",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
   }
 }

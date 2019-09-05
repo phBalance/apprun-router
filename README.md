@@ -36,7 +36,12 @@ import { IPrettyRoute } from "apprun-router/pretty";
 <a href="/foo" onclick="e => (app.route as IPrettyRoute).linkClick(e)">
 ```
 
-2. Once all the links are created in your DOM you can provide a description of the elements (c.f. [Locating DOM elements using selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors)).
+Alternatively, as of version 0.3.0, you can use this terser form (note that there is no need to import in each tsx/jsx file that you're using):
+```
+<a href="/foo" $prettylink>
+```
+
+2. If all the link elements have been created in your DOM without an onclick handler, say if you have used server side rendering and you want to rehydrate them on the client, you can provide a description of the elements (c.f. [Locating DOM elements using selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors)) and this will add onclick handler to each matching link.
 ```
 import { addPrettyLinkHandlers } from "apprun-router/pretty";
 

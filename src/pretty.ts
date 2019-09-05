@@ -4,6 +4,17 @@ export interface IPrettyRoute extends Route {
 	linkClick: (event: MouseEvent) => void;
 }
 
+// Handle automatically setting the pretty link onclick handler
+// via the $prettylink directive
+const prettyClickDirective: string = "$prettylink";
+app.on("$", ({key, props}) => {
+		if (key === prettyClickDirective) {
+			if(typeof props[key] === "boolean") {
+				props.onclick = linkClick;
+			}
+		}
+	});
+
 // A router function that handles "pretty links" (i.e. non hash based urls)
 // and html5 history.
 function prettyLinkRouter(url: string, popstate: boolean = false): void {

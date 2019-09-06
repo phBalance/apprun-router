@@ -23,9 +23,9 @@ import "apprun";
 import "apprun-router/pretty";
 ```
 
-Providing this import after AppRun will overwrite AppRun's default router with this package's pretty link router. The only thing that now remains is to ensure that when the pretty links are clicked, they don't cause a server GET request but rather get routed to the pretty router. This is done by adding an click handler to the tag that has the link behaviour.
+Providing this import after AppRun will overwrite AppRun's default router with this package's pretty link router. 
 
-The pretty router provides 2 ways to implement this functionality:
+The only thing that now remains is to ensure that when the pretty links are clicked they don't cause a server GET request but rather get routed to the pretty router. This is done by adding an `onclick` handler to the tag that has the link behaviour. The pretty router provides 2 ways to implement this functionality:
 
 1. Since AppRun creates the global variable app, we can add an onclick event attribute to the HTML for each link that you want to call the pretty router:
 ```

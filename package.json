@@ -8,7 +8,7 @@
     "clean": "rimraf dist/ hash.js hash.js.map hash.d.ts pretty.js pretty.js.map pretty.d.ts",
     "lint": "tslint -p tsconfig.json",
     "lint:fix": "npm run lint -- --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"No tests specified\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint"
   },
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "apprun": "^1.18.0",
+    "np": "^5.0.3",
     "peer-deps-externals-webpack-plugin": "^1.0.4",
     "rimraf": "^3.0.0",
     "ts-loader": "^5.4.5",

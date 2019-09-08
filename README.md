@@ -1,5 +1,5 @@
 # Routers for AppRun
-A collection of simple router functionality (hash links, pretty links, and HTML5 history) that replace the basic router that is available in the lightweight library [AppRun](https://github.com/yysun/apprun). It is implemented in [TypeScript](https://www.typescriptlang.org/).
+A collection of simple router functionality (hash links, pretty links, and HTML5 history) to replace the basic router that is available in the lightweight library [AppRun](https://github.com/yysun/apprun). It is implemented in [TypeScript](https://www.typescriptlang.org/).
 
 ## Getting Started
 

@@ -1,5 +1,5 @@
 # Routers for AppRun
-A collection of simple router functionality (hash links, pretty links, and HTML5 history) to replace the basic router that is available in the lightweight library [AppRun](https://github.com/yysun/apprun). It is implemented in [TypeScript](https://www.typescriptlang.org/).
+A collection of simple router functionality (hash links, pretty links, and HTML5 history) to replace the basic router that is available in the lightweight library [AppRun](https://github.com/yysun/apprun). It is written using [TypeScript](https://www.typescriptlang.org/).
 
 ## Getting Started
 
@@ -36,12 +36,14 @@ import { IPrettyRoute } from "apprun-router/pretty";
 <a href="/foo" onclick="e => (app.route as IPrettyRoute).linkClick(e)">
 ```
 
-Alternatively, as of version 0.3.0, you can use this terser form (note that there is no need to import in each tsx/jsx file that you're using):
+2. Alternatively, as of version 0.3.0, you can use this more compact form (note that there is no need to import in each tsx/jsx file that you're using):
 ```
 <a href="/foo" $prettylink>
 ```
 
-2. If all the link elements have been created in your DOM without an onclick handler, say if you have used server side rendering and you want to rehydrate them on the client, you can provide a description of the elements (c.f. [Locating DOM elements using selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors)) and this will add onclick handler to each matching link.
+#### Pretty Links and Server Side Rendering/Rehydration
+
+If all the link elements have been created in your DOM without an onclick handler, say if you have used server side rendering and you want to rehydrate them on the client, you can provide a description of the elements (c.f. [Locating DOM elements using selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors)) and this will add onclick handler to each matching link.
 ```
 import { addPrettyLinkHandlers } from "apprun-router/pretty";
 

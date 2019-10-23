@@ -59,4 +59,4 @@ export function addPrettyLinkHandlers(selectors: string): void {
 }
 
 // Overwrite AppRun's default router which only supports hash links.
-(app.route as IPrettyRoute) = prettyLinkRouter;
+app.route = prettyLinkRouter;

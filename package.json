@@ -28,6 +28,7 @@
     "JavaScript"
   ],
   "author": "Peter Hunnisett <peter@softwarebalm.com> (https://softwarebalm.com)",
+  "private": false,
   "license": "MIT",
   "homepage": "https://github.com/phBalance/apprun-router#readme",
   "peerDependencies": {

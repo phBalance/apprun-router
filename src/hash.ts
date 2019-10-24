@@ -1,8 +1,9 @@
 import { app, ROUTER_404_EVENT, ROUTER_EVENT } from "apprun";
 
 // A router that handles hash based links. It provides no more functionality than the
-// default AppRun router.
+// default AppRun router. URL is assumed to start with a # (unless it's absent).
 function hashLinkRouter(url: string): void {
+	if(!url) url = "#";
 	const [name, ...rest] = url.split("/");
 	app.run(name, ...rest) || app.run(ROUTER_404_EVENT, name, ...rest);
 	app.run(ROUTER_EVENT, name, ...rest);

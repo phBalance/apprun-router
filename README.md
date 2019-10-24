@@ -1,5 +1,6 @@
 # Routers for AppRun
 [![npm](https://img.shields.io/npm/v/apprun-router.svg)](https://www.npmjs.com/package/apprun-router)
+[![License](https://img.shields.io/:license-mit-blue.svg)](LICENSE)
 
 A collection of simple router functionality (hash links, pretty links, and HTML5 history) to replace the basic router that is available in the lightweight library [AppRun](https://github.com/yysun/apprun). It is written using [TypeScript](https://www.typescriptlang.org/).
 

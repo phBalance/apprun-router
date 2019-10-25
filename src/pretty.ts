@@ -76,6 +76,7 @@ app.on("$", ({key, props}) => {
 function prettyLinkRouter(url: string, popstate: boolean = false): void {
 	// Adjust url in case there is a dynamic portion such as a query or
 	// dynamic segment.
+	const origUrl = url;
 
 	// Any queries?
 	let queries: {[name: string]: string} | undefined;
@@ -120,7 +121,7 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 	app.run(url, dynamic, queries) || app.run(ROUTER_404_EVENT, url, dynamic, queries);
 	app.run(ROUTER_EVENT, url, dynamic, queries);
 
-	if(!popstate) history.pushState({}, "", url);
+	if(!popstate) history.pushState({}, "", origUrl);
 }
 
 const prettyLinkRouterPopstateHandler = (_event: PopStateEvent) => {

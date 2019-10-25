@@ -1,6 +1,6 @@
 {
   "name": "apprun-router",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Choose your router for apprun. One supports pretty links and html5 history and the other hash links.",
   "sideEffects": true,
   "scripts": {

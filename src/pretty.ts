@@ -9,7 +9,7 @@ export interface IPrettyRouteDynamicSegments {
 }
 
 export interface IPrettyRouteQueries {
-	[field: string]: string | undefined;
+	[field: string]: string;
 }
 
 const dynamicRoutes: IPrettyRouteDynamicSegments = {};
@@ -79,13 +79,13 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 	const origUrl = url;
 
 	// Any queries?
-	let queries: {[name: string]: string} | undefined;
+	let queries: IPrettyRouteQueries = {};
 
 	const queryPos = url.search(/\?/);
 	if(queryPos >= 0) {
 		const queryStr = url.substring(queryPos + 1);
 		const queryStrings = queryStr.split(prettyLinkQuerySeparator);
-		queries = {};
+
 		for(const query of queryStrings) {
 			const [field, value] = query.split("=");
 			queries[field] = value;
@@ -95,7 +95,7 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 	}
 
 	// Any dynamic segements?
-	let dynamic: {[name: string]: string} | undefined;
+	let dynamic: IPrettyRouteDynamicSegments = {};
 	const matchingDynamicRoute = Object.keys(dynamicRoutes).find((route) => {
 		return url.startsWith(route + "/");
 	});
@@ -104,8 +104,6 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 		const dynamicParams = dynamicRoutes[matchingDynamicRoute].split("/");
 
 		console.assert(dynamicParams.length === urlDynamicParams.length, `expected dynamic and actual dynamic length don't match ${dynamicParams.length} vs. ${urlDynamicParams.length}`);
-
-		dynamic = {};
 
 		// First param will always be a "", so ignore it.
 		for(let i = 1; i < dynamicParams.length; ++i) {

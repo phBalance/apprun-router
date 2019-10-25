@@ -18,7 +18,7 @@ npm install --save apprun # peer dependency
 ```
 ### Pretty Links
 
-As of 0.4.0, this router supports arbitrary depth path segments, dynamic path segments, and query strings along with HTML5 History.
+As of version 0.4.0, this router supports arbitrary depth path segments, dynamic path segments, and query strings along with HTML5 History.
 
 #### Pretty Links and HTML5 History
 
@@ -47,7 +47,7 @@ import { IPrettyRoute } from "apprun-router/pretty";
 
 #### Query strings
 
-Query strings (the part of the URI after a ?) are supported, generally, with no extra effort. By default the separator is a `&`, but this can be changed using the `setPrettyLinkQuerySeparator` method. This change affects all routes.
+Query strings (the part of the URI after a ?) are supported, generally, with no extra effort. By default the field separator is a `&`, but this can be changed using the `setPrettyLinkQuerySeparator` method. This change affects all routes.
 
 ```
 import {setPrettyLinkQuerySeparator} from "apprun-router/pretty";
@@ -70,13 +70,14 @@ class YourComponent extends Component {
     ...
 
     update = {
-        "EVENT_NAME": (state: any, dynamicSegments: IPrettyRouteDynamicSegments | undefined, queries: IPrettyRouteQueries | undefined) => state
+        "EVENT_NAME": (state: any, dynamicSegments: IPrettyRouteDynamicSegments, queries: IPrettyRouteQueries) => state
     };
 
     ....
 }
-
 ```
+
+Any found query fields will be provided as a mapping `{field1: value1, etc}`. If there is no query string, and hence no fields, the mapping will be empty (`{}`).
 
 #### Dynamic segments
 
@@ -98,7 +99,7 @@ class YourComponent extends Component {
     state: any = {};
 
     update = {
-        [addDynamicRoute(URL_FOO)]: (state: any, dynamicSegments: IPrettyRouteDynamicSegments | undefined, queries: IPrettyRouteQueries | undefined) => {
+        [addDynamicRoute(URL_FOO)]: (state: any, dynamicSegments: IPrettyRouteDynamicSegments, queries: IPrettyRouteQueries) => {
             return {
                 dynamicSegments: dynamicSegments,
                 queries: queries,
@@ -120,6 +121,8 @@ In this example there are a few points to recognize:
 2. When the router calls an event, both the dynamic segements and the queries are provided. If the URL has none, this is undefined, otherwise they're a mapping. If the URL were `URL_EXAMPLE` then the `dynamicSegments` would have a value of `{a: "dynamic1", b: "dynamic2", c: "dynamic3"}` and the `queries` would have a value of `{field1: "value1", field2: "value2", field3: "value3"}`.
 
 3. If for some reason you no longer need a dynamic route, you will have to remove it using the `removeDynamicRoute` method. In the case of the example above it would be `removeDynamicRoute(URL_FOO)`.
+
+4. If the route is entirely static the dynamic parameter provided to the update method will be an empty mapping (`{}`).
 
 
 ##### Downside of the dynamic segments implementation

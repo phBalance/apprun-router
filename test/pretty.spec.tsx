@@ -22,56 +22,56 @@ const urlStatic = "/basic";
 const urlStaticWithQuery = "/foo";
 const urlStaticWithQueryStatic = "/foo";
 const urlStaticWithQueryExample = "/foo?bar=7";
-const urlStaticWithQueryExampleDynamicArgs = undefined;
-const urlStaticWithQueryExampleQueryArgs = {bar: "7"};
+const urlStaticWithQueryExampleDynamicArgs: IPrettyRouteDynamicSegments = {};
+const urlStaticWithQueryExampleQueryArgs: IPrettyRouteQueries = {bar: "7"};
 
 const urlStaticWithSlashWithQuery = "/foo/";
 const urlStaticWithSlashWithQueryStatic = "/foo/";
 const urlStaticWithSlashWithQueryExample = "/foo/?bar=9";
-const urlStaticWithSlashWithQueryExampleDynamicArgs = undefined;
-const urlStaticWithSlashWithQueryExampleQueryArgs = {bar: "9"};
+const urlStaticWithSlashWithQueryExampleDynamicArgs: IPrettyRouteDynamicSegments = {};
+const urlStaticWithSlashWithQueryExampleQueryArgs: IPrettyRouteQueries = {bar: "9"};
 
 const urlStaticWithMultipleQuery = "/foo";
 const urlStaticWithMultipleQueryStatic = "/foo";
 const urlStaticWithMultipleQueryExample = "/foo?name=fred&age=88";
-const urlStaticWithMultipleQueryExampleDynamicArgs = undefined;
-const urlStaticWithMultipleQueryExampleQueryArgs = {name: "fred", age: "88"};
+const urlStaticWithMultipleQueryExampleDynamicArgs: IPrettyRouteDynamicSegments = {};
+const urlStaticWithMultipleQueryExampleQueryArgs: IPrettyRouteQueries = {name: "fred", age: "88"};
 
 const urlStaticWithMultipleQueryUnusualSeparation = "/foo";
 const urlStaticWithMultipleQueryUnusualSeparationStatic = "/foo";
 const urlStaticWithMultipleQueryUnusualSeparationExample = "/foo?name=bob;age=99";
-const urlStaticWithMultipleQueryUnusualSeparationExampleDynamicArgs = undefined;
-const urlStaticWithMultipleQueryUnusualSeparationExampleQueryArgs = {name: "bob", age: "99"};
+const urlStaticWithMultipleQueryUnusualSeparationExampleDynamicArgs: IPrettyRouteDynamicSegments = {};
+const urlStaticWithMultipleQueryUnusualSeparationExampleQueryArgs: IPrettyRouteQueries = {name: "bob", age: "99"};
 
 const urlOneDynamicSegments = "/foo/:bar";
 const urlOneDynamicSegmentsStatic = "/foo";
 const urlOneDynamicSegmentsExample = "/foo/fred";
-const urlOneDynamicSegmentsExampleDynamicArgs = {bar: "fred"};
-const urlOneDynamicSegmentsExampleQueryArgs = undefined;
+const urlOneDynamicSegmentsExampleDynamicArgs: IPrettyRouteDynamicSegments = {bar: "fred"};
+const urlOneDynamicSegmentsExampleQueryArgs: IPrettyRouteQueries = {};
 
 const urlStaticSimilarToOneDynamicSegments = "/foobar";
 const urlStaticSimilarToOneDynamicSegmentsStatic = "/foobar";
 const urlStaticSimilarToOneDynamicSegmentsExample = "/foobar";
-const urlStaticSimilarToOneDynamicSegmentsExampleDynamicArgs = undefined;
-const urlStaticSimilarToOneDynamicSegmentsExampleQueryArgs = undefined;
+const urlStaticSimilarToOneDynamicSegmentsExampleDynamicArgs: IPrettyRouteDynamicSegments = {};
+const urlStaticSimilarToOneDynamicSegmentsExampleQueryArgs: IPrettyRouteQueries = {};
 
 const urlTwoDynamicSegments = "/foo/:bar/:baz";
 const urlTwoDynamicSegmentsStatic = "/foo";
 const urlTwoDynamicSegmentsExample = "/foo/fred/barney";
-const urlTwoDynamicSegmentsExampleDynamicArgs = {bar: "fred", baz: "barney"};
-const urlTwoDynamicSegmentsExampleQueryArgs = undefined;
+const urlTwoDynamicSegmentsExampleDynamicArgs: IPrettyRouteDynamicSegments = {bar: "fred", baz: "barney"};
+const urlTwoDynamicSegmentsExampleQueryArgs: IPrettyRouteQueries = {};
 
 const urlTwoDynamicSegmentsAndQuery = "/foo/:bar/:baz";
 const urlTwoDynamicSegmentsAndQueryStatic = "/foo";
 const urlTwoDynamicSegmentsAndQueryStaticExample = "/foo/seg1/seg2?boo=8";
-const urlTwoDynamicSegmentsAndQueryStaticExampleDynamicArgs = {bar: "seg1", baz: "seg2"};
-const urlTwoDynamicSegmentsAndQueryStaticExampleQueryArgs = {boo: "8"};
+const urlTwoDynamicSegmentsAndQueryStaticExampleDynamicArgs: IPrettyRouteDynamicSegments = {bar: "seg1", baz: "seg2"};
+const urlTwoDynamicSegmentsAndQueryStaticExampleQueryArgs: IPrettyRouteQueries = {boo: "8"};
 
 const urlTwoDynamicSegmentsWithStaticAndQuery = "/foo/:bar/foo2/:baz";
 const urlTwoDynamicSegmentsWithStaticAndQueryStatic = "/foo";
 const urlTwoDynamicSegmentsWithStaticAndQueryStaticExample = "/foo/crazy/foo2/food?planet=earth&kingdom=bacteria";
-const urlTwoDynamicSegmentsWithStaticAndQueryStaticExampleDynamicArgs = {bar: "crazy", baz: "food"};
-const urlTwoDynamicSegmentsWithStaticAndQueryStaticExampleQueryArgs = {planet: "earth", kingdom: "bacteria"};
+const urlTwoDynamicSegmentsWithStaticAndQueryStaticExampleDynamicArgs: IPrettyRouteDynamicSegments = {bar: "crazy", baz: "food"};
+const urlTwoDynamicSegmentsWithStaticAndQueryStaticExampleQueryArgs: IPrettyRouteQueries = {planet: "earth", kingdom: "bacteria"};
 
 describe("pretty router", () => {
 	it("should overwrite the default router simply by importing", () => {
@@ -252,9 +252,9 @@ describe("pretty router - link clicking", () => {
 
 		class TestComponent extends Component {
 			public update = {
-				[URL_FOO]: (_: any, dynamicSegments: IPrettyRouteDynamicSegments | undefined, queries: IPrettyRouteQueries | undefined) => {
-					expect(dynamicSegments).toEqual(undefined);
-					expect(queries).toEqual(undefined);
+				[URL_FOO]: (_: any, dynamicSegments: IPrettyRouteDynamicSegments, queries: IPrettyRouteQueries) => {
+					expect(dynamicSegments).toEqual({});
+					expect(queries).toEqual({});
 
 					test.unmount();
 					div.remove();
@@ -289,7 +289,7 @@ describe("pretty router - link clicking", () => {
 
 		class TestComponent extends Component {
 			public update = {
-				[addDynamicRoute(URL_FOO)]: (_: any, dynamicSegments: IPrettyRouteDynamicSegments | undefined, queries: IPrettyRouteQueries | undefined) => {
+				[addDynamicRoute(URL_FOO)]: (_: any, dynamicSegments: IPrettyRouteDynamicSegments, queries: IPrettyRouteQueries) => {
 					expect(dynamicSegments).toEqual(URL_DYNAMICS);
 					expect(queries).toEqual(URL_QUERIES);
 
@@ -328,7 +328,7 @@ describe("pretty router - link clicking", () => {
 
 		app.run("route", urlTwoDynamicSegmentsWithStaticAndQueryStaticExample);
 
-		expect(router404EventFn).toHaveBeenCalledWith(url404, undefined, urlTwoDynamicSegmentsWithStaticAndQueryStaticExampleQueryArgs);
+		expect(router404EventFn).toHaveBeenCalledWith(url404, {}, urlTwoDynamicSegmentsWithStaticAndQueryStaticExampleQueryArgs);
 
 		app.off(ROUTER_404_EVENT, router404EventFn);
 	});
@@ -400,7 +400,7 @@ describe("pretty router - dynamic segments", () => {
 		app.run("route", urlTwoDynamicSegmentsExample);
 
 		expect(routerEventFn).toHaveBeenCalled();
-		expect(router404EventFn).toHaveBeenCalledWith(urlTwoDynamicSegmentsExample, undefined, undefined);
+		expect(router404EventFn).toHaveBeenCalledWith(urlTwoDynamicSegmentsExample, {}, {});
 		expect(routerRouteFn).not.toHaveBeenCalled();
 
 		app.off(ROUTER_EVENT, routerEventFn);

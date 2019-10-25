@@ -49,6 +49,7 @@ import { IPrettyRoute } from "apprun-router/pretty";
 Both query strings (the part of the URI after a ?) and dynamic segments (generic path segments) are supported. Query strings require no effort and are parsed and provided automatically where as dynamic segments, unsurprisingly, require a small amount of configuration.
 
 ```
+import app, { Component } from "apprun";
 import {addDynamicRoute, IPrettyRouteDynamicSegments, IPrettyRouteQueries, setPrettyLinkQuerySeparator} from "apprun-router/pretty";
 
 const URL_FOO = "/test-url/:a/foobar/:b/foobaz/:c";
@@ -59,17 +60,21 @@ const URL_DYNAMICS = {a: "dynamic1", b: "dynamic2", c: "dynamic3"};
 const URL_QUERIES = {field1: "value1", field2: "value2", field3: "value3"};
 */
 
+setPrettyLinkQuerySeparator("&"); // This is the default separator for query fields and doesn't need to be set.
+
 class YourComponent extends Component {
-    state = {};
+    state: any = {};
 
     update = {
         [addDynamicRoute(URL_FOO)]: (state: any, dynamicSegments: IPrettyRouteDynamicSegments | undefined, queries: IPrettyRouteQueries | undefined) => {
-            state.dynamicSegments = dynamicSegments;
-            state.queries = queries;
+            return {
+                dynamicSegments: dynamicSegments,
+                queries: queries,
+            };
         },
     };
 
-    view = (state) => {
+    view = (state: any) => {
         return <>
             <p>Dynamic segements: {JSON.stringify(state.dynamicSegments)} queries: {JSON.stringify(state.queries)}</p>
         </>;
@@ -78,12 +83,17 @@ class YourComponent extends Component {
 ```
 
 In this example there are a few points to recognize:
-1. To support dynamic segements you have to specify them. This is done when setting the router event in `YourComponent.update`. The `addDynamicRoute` method will turn `URL_FOO` into 2 parts: the static portion that the router will route against and the dynamic portion which is 1 or more segements that are segment names and start with a `:`. For instance, in the case of URL_FOO in the example above we have 3 dynamic segments, `a`, `b`, and `c`.
+1. To support dynamic segements you have to specify them. This is done when setting the router event in `YourComponent.update`. The `addDynamicRoute` method will turn `URL_FOO` into 2 parts: the static portion that the router will route against and the dynamic portion which is 1 or more segments that are segment names and start with a `:`. For instance, in the case of `URL_FOO` in the example above we have 3 dynamic segments, `a`, `b`, and `c`.
 
 2. When the router calls an event, both the dynamic segements and the queries are provided. If the URL has none, this is undefined, otherwise they're a mapping. If the URL were `URL_EXAMPLE` then the `dynamicSegments` would have a value of `{a: "dynamic1", b: "dynamic2", c: "dynamic3"}` and the `queries` would have a value of `{field1: "value1", field2: "value2", field3: "value3"}`.
 
 3. If for some reason you no longer need a dynamic route, you will have to remove it using the `removeDynamicRoute` method. In the case of the example above it would be `removeDynamicRoute(URL_FOO)`.
 
+4. By default the router separates query fields using a `&`. However, other separators can be specified using the `setPrettyLinkQuerySeparator` method.
+
+##### Downside of the dynamic segments implementation
+
+The support is very straight forward and can cause surprising behaviour if steps aren't taken. A dynamic route of `/foo/:bar/:baz` will call your component's update method if the URL is `/foo` (with dynamic of undefined), `/foo/crazy` (with dynamic of {bar: "crazy"}), as well as what you were probably expecting `/foo/crazy/dude` (with dynamic of {bar: "crazy", baz: "dude"}). This means that some of the error detection is passed to the user's update method.
 
 #### Pretty Links and Server Side Rendering/Rehydration
 

@@ -26,6 +26,8 @@
   "keywords": [
     "AppRun",
     "router",
+    "query strings",
+    "dynamic segments",
     "HTML5 history",
     "pretty links",
     "TypeScript",

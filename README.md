@@ -44,6 +44,47 @@ import { IPrettyRoute } from "apprun-router/pretty";
 <a href="/foo" $prettylink>
 ```
 
+#### Query strings and dynamic segments
+
+Both query strings (the part of the URI after a ?) and dynamic segments (generic path segments) are supported. Query strings require no effort and are parsed and provided automatically where as dynamic segments, unsurprisingly, require a small amount of configuration.
+
+```
+import {addDynamicRoute, IPrettyRouteDynamicSegments, IPrettyRouteQueries, setPrettyLinkQuerySeparator} from "apprun-router/pretty";
+
+const URL_FOO = "/test-url/:a/foobar/:b/foobaz/:c";
+
+/* Given the above dynamic segments definition: 
+const URL_EXAMPLE = "/test-url/dynamic1/foobar/dynamic2/foobaz/dynamic3?field1=value1&field2=value2&field3=value3";
+const URL_DYNAMICS = {a: "dynamic1", b: "dynamic2", c: "dynamic3"};
+const URL_QUERIES = {field1: "value1", field2: "value2", field3: "value3"};
+*/
+
+class YourComponent extends Component {
+    state = {};
+
+    update = {
+        [addDynamicRoute(URL_FOO)]: (state: any, dynamicSegments: IPrettyRouteDynamicSegments | undefined, queries: IPrettyRouteQueries | undefined) => {
+            state.dynamicSegments = dynamicSegments;
+            state.queries = queries;
+        },
+    };
+
+    view = (state) => {
+        return <>
+            <p>Dynamic segements: {JSON.stringify(state.dynamicSegments)} queries: {JSON.stringify(state.queries)}</p>
+        </>;
+    };
+}
+```
+
+In this example there are a few points to recognize:
+1. To support dynamic segements you have to specify them. This is done when setting the router event in `YourComponent.update`. The `addDynamicRoute` method will turn `URL_FOO` into 2 parts: the static portion that the router will route against and the dynamic portion which is 1 or more segements that are segment names and start with a `:`. For instance, in the case of URL_FOO in the example above we have 3 dynamic segments, `a`, `b`, and `c`.
+
+2. When the router calls an event, both the dynamic segements and the queries are provided. If the URL has none, this is undefined, otherwise they're a mapping. If the URL were `URL_EXAMPLE` then the `dynamicSegments` would have a value of `{a: "dynamic1", b: "dynamic2", c: "dynamic3"}` and the `queries` would have a value of `{field1: "value1", field2: "value2", field3: "value3"}`.
+
+3. If for some reason you no longer need a dynamic route, you will have to remove it using the `removeDynamicRoute` method. In the case of the example above it would be `removeDynamicRoute(URL_FOO)`.
+
+
 #### Pretty Links and Server Side Rendering/Rehydration
 
 If all the link elements have been created in your DOM without an onclick handler, say if you have used server side rendering and you want to rehydrate them on the client, you can provide a description of the elements (c.f. [Locating DOM elements using selectors](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors)) and this will add onclick handler to each matching link.

@@ -8,3 +8,6 @@ hash.d.ts
 pretty.js
 pretty.js.map
 pretty.d.ts
+
+# test artifacts
+coverage

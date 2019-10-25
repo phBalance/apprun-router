@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"jsx": "react",
+		"reactNamespace": "app",
+		"lib": ["dom", "es6"],
+		"experimentalDecorators": true,
+		"sourceMap": true,
+		"declaration": true,
+		"declarationDir": ".",
+		"strict": true
+	},
+	"include": [
+        "src/**/*",
+        "test/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	]
+}

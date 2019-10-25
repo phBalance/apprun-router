@@ -7,9 +7,12 @@
     "build": "npm run clean && webpack -p --mode production",
     "build:dev": "npm run clean && webpack -p --mode development",
     "clean": "rimraf dist/ hash.js hash.js.map hash.d.ts pretty.js pretty.js.map pretty.d.ts",
-    "lint": "tslint -p tsconfig.json",
+    "lint": "tslint -p tsconfig.tslint.json",
     "lint:fix": "npm run lint -- --fix",
-    "test": "echo \"No tests specified\"",
+    "test": "jest --coverage",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
+    "test:debug:brk": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test:watch": "jest --watch",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint"
   },
@@ -36,14 +39,36 @@
     "apprun": ">=1.18.0 || >=2.18.0"
   },
   "devDependencies": {
+    "@types/jasmine": "^3.4.4",
     "apprun": "^1.18.0",
+    "jasmine-core": "^3.5.0",
+    "jest": "^24.9.0",
     "np": "^5.0.3",
     "peer-deps-externals-webpack-plugin": "^1.0.4",
     "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
     "ts-loader": "^5.4.5",
     "tslint": "^5.19.0",
     "typescript": "^3.4.5",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "globals": {
+      "ts-jest": {
+        "diagnostics": true
+      },
+      "collectCoverage": true
+    }
   }
 }

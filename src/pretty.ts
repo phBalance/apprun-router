@@ -79,7 +79,7 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 	const origUrl = url;
 
 	// Any queries?
-	let queries: IPrettyRouteQueries = {};
+	const queries: IPrettyRouteQueries = {};
 
 	const queryPos = url.search(/\?/);
 	if(queryPos >= 0) {
@@ -95,7 +95,7 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 	}
 
 	// Any dynamic segements?
-	let dynamic: IPrettyRouteDynamicSegments = {};
+	const dynamic: IPrettyRouteDynamicSegments = {};
 	const matchingDynamicRoute = Object.keys(dynamicRoutes).find((route) => {
 		return url.startsWith(route + "/");
 	});

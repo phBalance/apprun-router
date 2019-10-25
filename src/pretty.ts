@@ -126,13 +126,13 @@ function prettyLinkRouter(url: string, popstate: boolean = false): void {
 
 const prettyLinkRouterPopstateHandler = (_event: PopStateEvent) => {
 	// app.route cannot be undefined/null as it is assigned at the end of this module.
-	app.route!(location.pathname, true);
+	app.route!(location.href.replace(location.origin, ""), true);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
 	window.onpopstate = prettyLinkRouterPopstateHandler;
 
-	prettyLinkRouter(location.pathname);
+	prettyLinkRouter(location.href.replace(location.origin, ""));
 });
 
 // linkClick method to be used as an onclick event handler.

@@ -16,8 +16,9 @@ npm install --save apprun-router
 
 npm install --save apprun # peer dependency
 ```
+### Pretty Links
 
-### Common Use Cases
+As of 0.4.0, this router supports arbitrary depth path segments, dynamic path segments, and query strings along with HTML5 History.
 
 #### Pretty Links and HTML5 History
 
@@ -44,13 +45,46 @@ import { IPrettyRoute } from "apprun-router/pretty";
 <a href="/foo" $prettylink>
 ```
 
-#### Query strings and dynamic segments
+#### Query strings
 
-Both query strings (the part of the URI after a ?) and dynamic segments (generic path segments) are supported. Query strings require no effort and are parsed and provided automatically where as dynamic segments, unsurprisingly, require a small amount of configuration.
+Query strings (the part of the URI after a ?) are supported, generally, with no extra effort. By default the separator is a `&`, but this can be changed using the `setPrettyLinkQuerySeparator` method. This change affects all routes.
+
+```
+import {setPrettyLinkQuerySeparator} from "apprun-router/pretty";
+
+...
+
+// This is the default separator for query fields and doesn't need to be set.
+setPrettyLinkQuerySeparator("&");
+
+// You could choose the query field separator to be a `;`. This applies to all routes.
+setPrettyLinkQuerySeparator(";");
+```
+
+The query string is provided to component update methods via the 3rd parameter:
+```
+import app, { Component } from "apprun";
+import { IPrettyRouteDynamicSegments, IPrettyRouteQueries } from "apprun-router/pretty";
+
+class YourComponent extends Component {
+    ...
+
+    update = {
+        "EVENT_NAME": (state: any, dynamicSegments: IPrettyRouteDynamicSegments | undefined, queries: IPrettyRouteQueries | undefined) => state
+    };
+
+    ....
+}
+
+```
+
+#### Dynamic segments
+
+Dynamic segments (generic path segments) are supported. Unsurprisingly, they require a small amount of configuration.
 
 ```
 import app, { Component } from "apprun";
-import {addDynamicRoute, IPrettyRouteDynamicSegments, IPrettyRouteQueries, setPrettyLinkQuerySeparator} from "apprun-router/pretty";
+import { addDynamicRoute, IPrettyRouteDynamicSegments, IPrettyRouteQueries, setPrettyLinkQuerySeparator } from "apprun-router/pretty";
 
 const URL_FOO = "/test-url/:a/foobar/:b/foobaz/:c";
 
@@ -59,8 +93,6 @@ const URL_EXAMPLE = "/test-url/dynamic1/foobar/dynamic2/foobaz/dynamic3?field1=v
 const URL_DYNAMICS = {a: "dynamic1", b: "dynamic2", c: "dynamic3"};
 const URL_QUERIES = {field1: "value1", field2: "value2", field3: "value3"};
 */
-
-setPrettyLinkQuerySeparator("&"); // This is the default separator for query fields and doesn't need to be set.
 
 class YourComponent extends Component {
     state: any = {};
@@ -89,7 +121,6 @@ In this example there are a few points to recognize:
 
 3. If for some reason you no longer need a dynamic route, you will have to remove it using the `removeDynamicRoute` method. In the case of the example above it would be `removeDynamicRoute(URL_FOO)`.
 
-4. By default the router separates query fields using a `&`. However, other separators can be specified using the `setPrettyLinkQuerySeparator` method.
 
 ##### Downside of the dynamic segments implementation
 
@@ -107,7 +138,7 @@ import { addPrettyLinkHandlers } from "apprun-router/pretty";
 addPrettyLinkHandlers("nav li a");
 ```
 
-#### Hash Links
+### Hash Links
 
 If you only want hash based links, there is nothing to do as the AppRun package comes with this functionality by default. However, if you'd like to use the one included in this package, simply, as in the pretty link router case, import apprun and then the hash router. There is no special onclick event handler required to support hash links.
 ```

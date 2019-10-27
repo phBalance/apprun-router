@@ -127,7 +127,11 @@ In this example there are a few points to recognize:
 
 ##### Downside of the dynamic segments implementation
 
-The support is very straight forward and can cause surprising behaviour if steps aren't taken. A dynamic route of `/foo/:bar/:baz` will call your component's update method if the URL is `/foo` (with dynamic of undefined), `/foo/crazy` (with dynamic of {bar: "crazy"}), as well as what you were probably expecting `/foo/crazy/dude` (with dynamic of {bar: "crazy", baz: "dude"}). This means that some of the error detection is passed to the user's update method.
+The support is very straight forward and can cause surprising behaviours if steps aren't taken.
+
+1. A dynamic route of `/foo/:bar/:baz` will call your component's update method if the URL is `/foo` (with dynamic of {}), `/foo/crazy` (with dynamic of {bar: "crazy"}), as well as what you were probably expecting `/foo/crazy/dude` (with dynamic of {bar: "crazy", baz: "dude"}). This means that some of the error detection is passed to the user's update method.
+
+2. You cannot have routes that overlap. Due to the simple approach `/foo/:bar/baz` and `/foo/:bar/fred` will conflict as they share the same static portion before the first dynamic segment `:bar`. The second one that registers, using `addDynamicRoute`, will overwrite the first call.
 
 #### Pretty Links and Server Side Rendering/Rehydration
 

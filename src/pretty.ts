@@ -34,6 +34,9 @@ export function addDynamicRoute(route: string): string {
 
 	// Just in case someone passes in a static route - ignore it.
 	if(dynamicSegment) {
+		console.assert(!dynamicRoutes[staticSegment],
+			`Overwriting previously registered dynamic segment: ${staticSegment} + ${dynamicSegment}`);
+
 		dynamicRoutes[staticSegment] = dynamicSegment;
 	}
 

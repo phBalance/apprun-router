@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean && webpack -p --mode production",
     "build:dev": "npm run clean && webpack -p --mode development",
-    "clean": "rimraf dist/ hash.js hash.js.map hash.d.ts pretty.js pretty.js.map pretty.d.ts",
+    "clean": "rimraf dist/ coverage/ hash.js hash.js.map hash.d.ts pretty.js pretty.js.map pretty.d.ts",
     "lint": "tslint -p tsconfig.tslint.json",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --coverage",

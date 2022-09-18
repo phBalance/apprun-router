@@ -45,7 +45,7 @@
     "apprun": "^1.18.0",
     "jasmine-core": "^3.5.0",
     "jest": "^24.9.0",
-    "np": "^5.0.3",
+    "np": "^7.6.2",
     "peer-deps-externals-webpack-plugin": "^1.0.4",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.1.0",
